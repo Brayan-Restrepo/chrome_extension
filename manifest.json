@@ -3,9 +3,9 @@
   "version": "1.1",
   "description": "Description",
   "permissions": ["activeTab", "declarativeContent", "storage"],
-  "options_page": "options.html",
+  "options_page": "",
   "background": {
-    "scripts": ["background.js" , "function.js"],
+    "scripts": ["deployContoller.js" , "controllers/domController.js"],
     "persistent": false
   },
   "commands": {
@@ -23,7 +23,7 @@
     }
   },
   "page_action": {
-    "default_popup": "popup.html",
+    "default_popup": "menu/popup.html",
     "default_icon": {
       "16": "img/ojo.png",
       "32": "img/ojo.png",
