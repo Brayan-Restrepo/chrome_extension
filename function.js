@@ -1,16 +1,28 @@
 
+
 function llenar(command) {
-    const html = `
-        var aaa = document.getElementById('user[login]');
-        var inp = document.createElement('input');
-        inp.value = '${command}';
-        inp.id = 'dd';
-        var aaa = document.getElementById('user[login]');
-        aaa.parentNode.appendChild(inp);
-        `;
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      chrome.tabs.executeScript(
-          tabs[0].id,
-          {code: `document.getElementById("user[login]").value = "Brayan-Restrepo";`+html});
+        query(chrome.tabs, tabs[0].id, `addInput('${command}')`);
     });
-  }
+}
+
+function deleteLast(command) {    
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+        query(chrome.tabs, tabs[0].id, `deleteInput()`);
+    });
+}
+
+
+function query(tabs, idVentana, metodo) {
+    console.log(tabs);
+    tabs.executeScript(
+        idVentana,
+        {file: `functions/query.js`},
+        () => {
+            tabs.executeScript(
+                idVentana, 
+                {code: metodo}
+            );
+        }
+    );
+}

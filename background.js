@@ -5,13 +5,17 @@
 'use strict';
 
   chrome.commands.onCommand.addListener(function(command) {
-    llenar('command');
+    switch (command) {
+      case 'toggle-feature-br': 
+        deleteLast();
+        break;
+      case 'toggle-feature':
+        llenar('command');        
+        break;
+    }
   });
 
   chrome.runtime.onInstalled.addListener(function() {
-    chrome.storage.sync.set({color: '#3aa757'}, function() {
-      console.log("The color is green.");
-    });
     
     chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
       chrome.declarativeContent.onPageChanged.addRules([{
